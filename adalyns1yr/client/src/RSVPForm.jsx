@@ -71,7 +71,16 @@ function RSVPForm({ isOpen, onClose, isAttending, onSubmit }) {
   };
 
   const handleClose = () => {
-    if (!isSubmitting) {
+    if (isSubmitting) {
+      // Warn user that submission is in progress
+      if (window.confirm('RSVP submission is in progress. Are you sure you want to cancel?')) {
+        setIsSubmitting(false);
+        setFormData({ guest_name: '', adult_count: 1, child_count: 0 });
+        setShowSuccess(false);
+        setShowError(false);
+        onClose();
+      }
+    } else {
       setFormData({ guest_name: '', adult_count: 1, child_count: 0 });
       setShowSuccess(false);
       setShowError(false);
@@ -114,7 +123,7 @@ function RSVPForm({ isOpen, onClose, isAttending, onSubmit }) {
         </div>
       )}
       <div className="rsvp-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="rsvp-modal-close" onClick={handleClose} disabled={isSubmitting}>
+        <button className="rsvp-modal-close" onClick={handleClose}>
           ×
         </button>
         
