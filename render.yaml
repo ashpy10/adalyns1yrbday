@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: adalyns-birthday-api
+    env: node
+    buildCommand: cd adalyns1yr/server && npm install
+    startCommand: cd adalyns1yr/server && npm start
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://adalyns1yrbd_user:JQoHVmWA4e2gIA5mX8TCgDcQnBMJY55M@dpg-d1ratgadbo4c73cn9emg-a.oregon-postgres.render.com/adalyns1yrbd
+      - key: PORT
+        value: 10000 

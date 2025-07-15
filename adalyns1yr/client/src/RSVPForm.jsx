@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './RSVPForm.css';
+import { API_ENDPOINTS } from './config.js';
 
 function RSVPForm({ isOpen, onClose, isAttending, onSubmit }) {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function RSVPForm({ isOpen, onClose, isAttending, onSubmit }) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +36,7 @@ function RSVPForm({ isOpen, onClose, isAttending, onSubmit }) {
         child_count: formData.child_count
       };
 
-      const response = await fetch('http://localhost:3001/api/rsvps', {
+      const response = await fetch(API_ENDPOINTS.RSVPS, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,7 +53,7 @@ function RSVPForm({ isOpen, onClose, isAttending, onSubmit }) {
       }
     } catch (error) {
       console.error('Error submitting RSVP:', error);
-      alert('Sorry, there was an error submitting your RSVP. Please try again.');
+      setShowError(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -61,6 +63,7 @@ function RSVPForm({ isOpen, onClose, isAttending, onSubmit }) {
     if (!isSubmitting) {
       setFormData({ guest_name: '', adult_count: 1, child_count: 0 });
       setShowSuccess(false);
+      setShowError(false);
       onClose();
     }
   };
@@ -80,6 +83,21 @@ function RSVPForm({ isOpen, onClose, isAttending, onSubmit }) {
               onClick={handleClose}
             >
               Awesome!
+            </button>
+          </div>
+        </div>
+      )}
+      {showError && (
+        <div className="error-popup">
+          <div className="error-content">
+            <div className="error-icon">😔</div>
+            <h3>Oh no!</h3>
+            <p>It looks like your invite had an error. Try again or text your RSVP to Darien at 714-931-7757</p>
+            <button 
+              className="error-close-btn"
+              onClick={handleClose}
+            >
+              Try Again
             </button>
           </div>
         </div>
