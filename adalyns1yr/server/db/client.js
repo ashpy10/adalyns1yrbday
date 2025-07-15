@@ -7,11 +7,14 @@ console.log("[DEBUG] process.env.DATABASE_URL:", process.env.DATABASE_URL);
 
 const db = new pg.Client({
   connectionString: process.env.DATABASE_URL,
-  connectionTimeoutMillis: 15000, // 15 second timeout
-  query_timeout: 15000, // 15 second timeout
-  statement_timeout: 15000, // 15 second timeout
+  connectionTimeoutMillis: 30000, // 30 second timeout
+  query_timeout: 30000, // 30 second timeout
+  statement_timeout: 30000, // 30 second timeout
   keepAlive: true,
-  keepAliveInitialDelayMillis: 10000
+  keepAliveInitialDelayMillis: 10000,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 db.connect()
