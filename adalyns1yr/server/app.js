@@ -29,6 +29,24 @@ app.get("/health", (req, res) => {
   res.json({ status: "healthy", timestamp: new Date().toISOString() });
 });
 
+// Database test endpoint
+app.get("/test-db", async (req, res) => {
+  try {
+    const result = await db.query('SELECT NOW() as current_time');
+    res.json({ 
+      status: "database_connected", 
+      time: result.rows[0].current_time,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('Database test error:', error);
+    res.status(500).json({ 
+      status: "database_error", 
+      error: error.message 
+    });
+  }
+});
+
 // Mount the RSVPs API router
 app.use("/api/rsvps", rsvpsRouter);
 

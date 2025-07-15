@@ -16,20 +16,12 @@ export async function getRsvpById(id) {
 export async function addRsvp({ guest_name, is_attending, adult_count, child_count }) {
   console.log('Starting database insert...');
   try {
-    // Add timeout to the query
-    const queryPromise = db.query(
+    const result = await db.query(
       `INSERT INTO birthdayrsvps (guest_name, is_attending, adult_count, child_count)
        VALUES ($1, $2, $3, $4)
        RETURNING *`,
       [guest_name, is_attending, adult_count, child_count]
     );
-    
-    const result = await Promise.race([
-      queryPromise,
-      new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Database query timeout')), 10000)
-      )
-    ]);
     
     console.log('Database insert successful:', result.rows[0]);
     return result.rows[0];
