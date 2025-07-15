@@ -14,13 +14,20 @@ export async function getRsvpById(id) {
 
 // Add a new RSVP
 export async function addRsvp({ guest_name, is_attending, adult_count, child_count }) {
-  const result = await db.query(
-    `INSERT INTO birthdayrsvps (guest_name, is_attending, adult_count, child_count)
-     VALUES ($1, $2, $3, $4)
-     RETURNING *`,
-    [guest_name, is_attending, adult_count, child_count]
-  );
-  return result.rows[0];
+  console.log('Starting database insert...');
+  try {
+    const result = await db.query(
+      `INSERT INTO birthdayrsvps (guest_name, is_attending, adult_count, child_count)
+       VALUES ($1, $2, $3, $4)
+       RETURNING *`,
+      [guest_name, is_attending, adult_count, child_count]
+    );
+    console.log('Database insert successful:', result.rows[0]);
+    return result.rows[0];
+  } catch (error) {
+    console.error('Database insert error:', error);
+    throw error;
+  }
 }
 
 // Update an RSVP

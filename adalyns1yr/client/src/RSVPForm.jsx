@@ -39,13 +39,19 @@ function RSVPForm({ isOpen, onClose, isAttending, onSubmit }) {
       console.log('Sending RSVP data:', rsvpData);
       console.log('API endpoint:', API_ENDPOINTS.RSVPS);
       
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+      
       const response = await fetch(API_ENDPOINTS.RSVPS, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(rsvpData)
+        body: JSON.stringify(rsvpData),
+        signal: controller.signal
       });
+      
+      clearTimeout(timeoutId);
       
       console.log('Response received:', response.status, response.statusText);
 

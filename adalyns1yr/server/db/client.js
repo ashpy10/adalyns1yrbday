@@ -10,9 +10,11 @@ const db = new pg.Client(process.env.DATABASE_URL);
 db.connect()
   .then(() => {
     console.log("🟢 Connected to Postgres via DATABASE_URL");
+    console.log("Database URL:", process.env.DATABASE_URL ? "Set" : "NOT SET");
   })
   .catch((err) => {
     console.error("🔴 Postgres connection error:", err);
+    console.error("DATABASE_URL:", process.env.DATABASE_URL ? "Set" : "NOT SET");
   });
 
 export default db;
