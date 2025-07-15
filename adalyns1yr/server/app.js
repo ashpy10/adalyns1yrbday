@@ -24,6 +24,11 @@ app.get("/", (req, res) => {
   res.json({ message: "Server is running!" });
 });
 
+// Health check endpoint to keep service awake
+app.get("/health", (req, res) => {
+  res.json({ status: "healthy", timestamp: new Date().toISOString() });
+});
+
 // Mount the RSVPs API router
 app.use("/api/rsvps", rsvpsRouter);
 
