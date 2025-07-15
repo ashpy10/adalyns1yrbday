@@ -1,0 +1,29 @@
+{
+  "name": "adalyns1yrbday",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Adalyn's 1st Birthday App - Full Stack Application",
+  "main": "adalyns1yr/server/server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon adalyns1yr/server/server.js",
+    "client": "cd adalyns1yr/client && npm run dev",
+    "build": "cd adalyns1yr/client && npm run build",
+    "start": "node adalyns1yr/server/server.js",
+    "install-all": "npm install && cd adalyns1yr/client && npm install",
+    "db:setup": "cd adalyns1yr/server && node seed.js",
+    "db:reset": "cd adalyns1yr/server && node seed.js --reset",
+    "db:schema": "psql $DATABASE_URL -f adalyns1yr/server/db/schema.sql",
+    "db:seed": "cd adalyns1yr/server && node db/seed.js"
+  },
+  "keywords": ["birthday", "react", "express", "postgresql"],
+  "author": "Ashley Pyka",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.0"
+  }
+} 
