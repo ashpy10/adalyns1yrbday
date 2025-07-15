@@ -9,11 +9,11 @@ function App() {
   const [isAttending, setIsAttending] = useState(null)
 
   useEffect(() => {
-    // Show splash for 3 seconds, then reveal invitation
+    // Show splash for 6 seconds, then reveal invitation
     const splashTimer = setTimeout(() => {
       setShowSplash(false)
       setShowInvitation(true)
-    }, 3000)
+    }, 6000)
 
     return () => clearTimeout(splashTimer)
   }, [])

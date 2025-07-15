@@ -26,14 +26,21 @@ router.get('/:id', async (req, res) => {
 
 // POST create RSVP
 router.post('/', async (req, res) => {
+  console.log('POST /api/rsvps received:', req.body);
   try {
     const { guest_name, is_attending, adult_count, child_count } = req.body;
+    console.log('Extracted data:', { guest_name, is_attending, adult_count, child_count });
+    
     if (!guest_name || typeof is_attending !== 'boolean') {
+      console.log('Validation failed:', { guest_name, is_attending });
       return res.status(400).json({ error: 'Missing required fields' });
     }
+    
     const newRsvp = await addRsvp({ guest_name, is_attending, adult_count, child_count });
+    console.log('RSVP created successfully:', newRsvp);
     res.status(201).json(newRsvp);
   } catch (err) {
+    console.error('Error creating RSVP:', err);
     res.status(500).json({ error: 'Failed to create RSVP' });
   }
 });

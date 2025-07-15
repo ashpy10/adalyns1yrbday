@@ -36,6 +36,9 @@ function RSVPForm({ isOpen, onClose, isAttending, onSubmit }) {
         child_count: formData.child_count
       };
 
+      console.log('Sending RSVP data:', rsvpData);
+      console.log('API endpoint:', API_ENDPOINTS.RSVPS);
+      
       const response = await fetch(API_ENDPOINTS.RSVPS, {
         method: 'POST',
         headers: {
@@ -43,6 +46,8 @@ function RSVPForm({ isOpen, onClose, isAttending, onSubmit }) {
         },
         body: JSON.stringify(rsvpData)
       });
+      
+      console.log('Response received:', response.status, response.statusText);
 
       if (response.ok) {
         const result = await response.json();
