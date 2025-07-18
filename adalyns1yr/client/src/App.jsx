@@ -112,6 +112,12 @@ function App() {
                 >
                   I'll be there! 🎉
                 </button>
+                <button 
+                  className="rsvp-btn not-attending"
+                  onClick={() => handleRSVP(false)}
+                >
+                  Can't make it 😔
+                </button>
               </div>
             </section>
           </main>

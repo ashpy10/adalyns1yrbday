@@ -53,7 +53,7 @@ body {
 
 .splash-content {
   text-align: center;
-  z-index: 10;
+  z-index: 1;
   animation: fadeInUp 1s ease-out 0.5s both;
 }
 
@@ -88,8 +88,8 @@ body {
 
 .baby-image {
   width: auto;
-  height: 350px;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
 }
 
 @keyframes flyDiagonal {
