@@ -80,7 +80,7 @@ body {
 .flying-baby {
   position: absolute;
   bottom: -50px;
-  left: -100px;
+  left: -50px;
   transform-style: preserve-3d;
   z-index: 5;
   animation: flyDiagonal 4.5s ease-in-out forwards;
@@ -94,19 +94,19 @@ body {
 
 @keyframes flyDiagonal {
   0% {
-    transform: translateX(-50vw) translateY(50px) scale(0.3);
+    transform: translateX(-20vw) translateY(50px) scale(0.3);
   }
   25% {
-    transform: translateX(-25vw) translateY(20px) scale(0.6);
+    transform: translateX(10vw) translateY(20px) scale(0.6);
   }
   50% {
-    transform: translateX(0vw) translateY(-300px) scale(1);
+    transform: translateX(40vw) translateY(-300px) scale(1);
   }
   75% {
-    transform: translateX(75vw) translateY(-550px) scale(0.6);
+    transform: translateX(70vw) translateY(-550px) scale(0.6);
   }
   100% {
-    transform: translateX(calc(100vw + 100px)) translateY(-750px) scale(0.3);
+    transform: translateX(calc(100vw + 50px)) translateY(-750px) scale(0.3);
   }
 }
 
@@ -386,6 +386,18 @@ body {
 .invitation-footer p {
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 767px) {
+  .flying-baby {
+    left: -30px;
+  }
+  
+  .baby-image {
+    width: 200px;
+    height: 200px;
+  }
 }
 
 /* Tablet and Desktop Responsive */
